@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sewa Kendaraan</title>
+    <style>
+      /* Global styles */
+      /* Body untuk tata letak vertikal */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* Susun elemen secara vertikal */
+        align-items: center; /* Pusatkan secara horizontal */
+        justify-content: center; /* Pusatkan secara vertikal */
+        height: 100vh; /* Tinggi penuh layar */
+      }
+
+      /* Heading berada di tengah atas */
+      .heading {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px; /* Jarak dengan elemen di bawahnya */
+      }
+
+      /* Pesan sukses */
+      .message {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #c3e6cb;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      /* Formulir sewa kendaraan */
+      form {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      /* Label */
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      /* Input, select, dan button */
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      /* Tombol */
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+      /* Gaya untuk navigasi */
+      .navigation {
+        display: flex;
+        justify-content: center; /* Link berada di tengah */
+        margin-bottom: 20px; /* Jarak ke heading/form */
+        gap: 15px; /* Jarak antar link */
+      }
+
+      .nav-link {
+        text-decoration: none; /* Hilangkan garis bawah */
+        color: #4caf50; /* Warna hijau */
+        font-weight: bold;
+        font-size: 14px;
+        padding: 8px 16px;
+        border: 1px solid #4caf50;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: #4caf50;
+        color: white; /* Warna teks menjadi putih saat hover */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navigation">
+      <a href="/admin/login" class="nav-link">admin</a>
+    </nav>
+    <h1 class="heading">Sewa Kendaraan</h1>
+
+    <!-- Pesan sukses -->
+    {% if message %}
+    <div class="message">{{ message }}</div>
+
+    {% endif %}
+
+    <!-- Formulir sewa kendaraan -->
+    <form action="/rent" method="POST">
+      <label for="customer_name">Nama Pelanggan:</label>
+      <input type="text" id="customer_name" name="customer_name" required />
+
+      <label for="vehicle_id">Pilih Kendaraan:</label>
+      <select id="vehicle_id" name="vehicle_id" required>
+        {% for vehicle in vehicles %}
+        <option value="{{ vehicle.id }}">
+          {{ vehicle.name }} - Rp{{ vehicle.price_per_day }}/hari (Stok: {{
+          vehicle.stock }})
+        </option>
+        {% endfor %}
+      </select>
+
+      <label for="rental_days">Jumlah Hari:</label>
+      <input
+        type="number"
+        id="rental_days"
+        name="rental_days"
+        min="1"
+        required
+      />
+
+      <button type="submit">Sewa</button>
+    </form>
+    <a href="/rent">← Kembali ke Menu Sewa</a>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Kendaraan</title>
+  </head>
+  <body>
+    <h1>Update Kendaraan</h1>
+    <form
+      action="{{ url_for('update_vehicle', vehicle_id=vehicle.id) }}"
+      method="POST"
+    >
+      <label for="name">Nama Kendaraan:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="{{ vehicle.name }}"
+        required
+      />
+      <label for="price_per_day">Harga Sewa per Hari:</label>
+      <input
+        type="number"
+        id="price_per_day"
+        name="price_per_day"
+        value="{{ vehicle.price_per_day }}"
+        required
+      />
+      <label for="stock">Stok Tersedia:</label>
+      <input
+        type="number"
+        id="stock"
+        name="stock"
+        value="{{ vehicle.stock }}"
+        required
+      />
+      <button type="submit">Update</button>
+    </form>
+  </body>
+</html>

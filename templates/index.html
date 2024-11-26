@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Kendaraan</title>
+    <!-- Menghubungkan file CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Daftar Kendaraan</h1>
+    <a href="{{ url_for('add_vehicle') }}">Tambah Kendaraan Baru</a>
+
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Nama Kendaraan</th>
+        <th>Harga Sewa per Hari</th>
+        <th>Stok Tersedia</th>
+        <th>Aksi</th>
+      </tr>
+      {% for vehicle in vehicles %}
+      <tr>
+        <td>{{ vehicle.id }}</td>
+        <td>{{ vehicle.name }}</td>
+        <td>{{ vehicle.price_per_day }}</td>
+        <td>{{ vehicle.stock }}</td>
+        <td>
+          <a href="{{ url_for('update_vehicle', vehicle_id=vehicle.id) }}"
+            >Edit</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

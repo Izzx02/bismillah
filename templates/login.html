@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Admin</title>
+    <style>
+      /* Gaya CSS tetap sama seperti sebelumnya */
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(120deg, #4caf50, #2e7d32);
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .login-container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #2e7d32;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        text-align: left;
+        margin: 10px 0 5px;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      input:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        background: #4caf50;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      button:hover {
+        background: #45a049;
+      }
+      .error {
+        color: white;
+        background-color: red;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+      a {
+        display: inline-block;
+        margin-top: 20px;
+        color: #4caf50;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Login Admin</h1>
+
+      <!-- Tampilkan pesan error hanya jika error ada -->
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <!-- Form login -->
+      <form action="/admin/login" method="POST">
+        <label for="username">Nama Pengguna:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Masukkan nama pengguna"
+          required
+        />
+
+        <label for="password">Kata Sandi:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Masukkan kata sandi"
+          required
+        />
+
+        <button type="submit">Masuk</button>
+      </form>
+
+      <!-- Tombol kembali -->
+      <a href="/rent">⬅ Kembali ke Tempat Sewa</a>
+    </div>
+  </body>
+</html>

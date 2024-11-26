@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+      .logout {
+        display: inline-block;
+        margin: 10px 0;
+        padding: 10px 15px;
+        background-color: #f44336;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      .logout:hover {
+        background-color: #e53935;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Admin Dashboard</h1>
+    <a href="/admin/logout" class="logout">Logout</a>
+    <h2>Daftar Kendaraan</h2>
+    <button onclick="window.location.href='/admin/add_vehicle'">
+      Tambah Kendaraan Baru
+    </button>
+    <!-- Link ke fungsi add_vehicle -->
+    <table border="1" cellspacing="0" cellpadding="5">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nama</th>
+          <th>Harga/Hari</th>
+          <th>Stok</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for vehicle in vehicles %}
+        <tr>
+          <td>{{ vehicle.id }}</td>
+          <td>{{ vehicle.name }}</td>
+          <td>Rp{{ vehicle.price_per_day }}</td>
+          <td>{{ vehicle.stock }}</td>
+          <td>
+            <a href="{{  url_for('update_vehicle', vehicle_id=vehicle.id)  }}"
+              >Edit</a
+            >
+            <!-- Link ke fungsi update_vehicle -->
+            <form
+              action="{{ url_for('delete_vehicle', vehicle_id=vehicle.id) }}"
+              method="POST"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                onclick="return confirm('Yakin ingin menghapus?')"
+              >
+                Hapus
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h2>Laporan Order</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nama Pelanggan</th>
+          <th>Nama Kendaraan</th>
+          <th>Jumlah Hari</th>
+          <th>Total Harga</th>
+          <th>Tanggal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.customer_name }}</td>
+          <td>{{ order.vehicle_name }}</td>
+          <td>{{ order.rental_days }}</td>
+          <td>Rp{{ order.total_price }}</td>
+          <td>{{ order.order_date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
